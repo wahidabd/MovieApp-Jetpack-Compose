@@ -2,9 +2,14 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
 }
+
+def baseUrlPropertiesFile = rootProject.file("api.properties")
+def baseUrlProperties = new Properties()
+baseUrlProperties.load(new FileInputStream(baseUrlPropertiesFile))
 
 android {
     compileSdk 32
@@ -20,6 +25,12 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField ("String", "BASE_URL", baseUrlProperties['BASE_URL'])
+        buildConfigField ("String", "API_KEY", baseUrlProperties['API_KEY'])
+        buildConfigField ("String", "THUMBNAIL_PATH", baseUrlProperties['THUMBNAIL_PATH'])
+        buildConfigField ("String", "POSTER_PATH", baseUrlProperties['POSTER_PATH'])
+
     }
 
     buildTypes {
@@ -68,8 +79,11 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager:0.13.0"
     implementation "com.google.accompanist:accompanist-pager-indicators:0.13.0"
 
-    //Window
-    implementation "androidx.window:window:1.0.0"
+    // Room
+    implementation "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+    implementation "androidx.room:room-ktx:2.4.2"
+    testImplementation "androidx.room:room-testing:2.4.2"
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
@@ -79,12 +93,29 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
 
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
+
     //Dagger - Hilt
-    implementation "com.google.dagger:hilt-android:2.38.1"
-    kapt "com.google.dagger:hilt-android-compiler:2.37"
+    implementation "com.google.dagger:hilt-android:2.42"
+    kapt "com.google.dagger:hilt-compiler:2.42"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
+    // compose image loading
+    implementation 'com.github.skydoves:landscapist-coil:1.4.3'
+
+    // compose insets
+    implementation 'com.google.accompanist:accompanist-insets:0.20.0'
+    implementation 'com.google.accompanist:accompanist-flowlayout:0.20.0'
+
+    // compose compatibles
+    implementation 'com.github.skydoves:orchestra-balloon:1.1.0'
+
+    // startup
+    implementation 'androidx.startup:startup-runtime:1.1.1'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -110,11 +141,11 @@ dependencies {
     //CircleImage
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //preferences
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
-    //Indicator
-    implementation 'me.relex:circleindicator:2.1.6'
 }

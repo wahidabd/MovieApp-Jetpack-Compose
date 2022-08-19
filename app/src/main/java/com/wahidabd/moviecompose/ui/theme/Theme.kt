@@ -2,33 +2,43 @@ package com.wahidabd.moviecompose.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.MaterialTheme.shapes
+import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.White
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200,
+    primary = blue200,
+    primaryVariant = blue,
+    secondary = teal200,
+    background = Black,
+    surface = Black,
+    onPrimary = Black,
+    onSecondary = White,
+    onBackground = White,
+    onSurface = White,
+    error = errorColor
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    primary = blue400,
+    primaryVariant = blue,
+    secondary = teal200,
+    background = White,
+    surface = White,
+    onPrimary = White,
+    onSecondary = White,
+    onBackground = Black,
+    onSurface = Black,
+    error = errorColor
 )
 
 @Composable
-fun MovieComposeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun MovieComposeAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
@@ -37,8 +47,8 @@ fun MovieComposeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Comp
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
-        shapes = Shapes,
+        typography = typography,
+        shapes = shapes,
         content = content
     )
 }

@@ -1,11 +1,12 @@
 package com.wahidabd.moviecompose.ui.theme
 
 import androidx.compose.ui.graphics.Color
+import androidx.core.graphics.toColorInt
 
-val purple200 = Color(0xFF651FFF)
-val purple500 = Color(0xFF6200EA)
-val background = Color(0xFF2B292B)
-val background800 = Color(0xFF424242)
-val background900 = Color(0xFF212121)
-val white87 = Color(0Xddffffff)
-val shimmerHighLight = Color(0xA3C2C2C2)
+val blue200 = Color(0xFF3377FF)
+val blue400 = Color(0xFF4488FF)
+val blue = Color(0xFF2266EE)
+val teal200 = Color(0XFF68E4DC)
+val errorColor = Color(0xFFB00020)
+
+val plamsaGradient = listOf(teal200, "#FF56bee0".toColorInt(), blue200)
